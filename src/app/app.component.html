@@ -1,1 +1,39 @@
-<app-header></app-header>
+<mat-sidenav-container class="example-container">
+  <mat-sidenav #sidenav>
+    <div class="sidenav-close-btn-container">
+      <button class="close-sidenav-btn" (click)="toogle()"><mat-icon>close</mat-icon></button>
+    </div>
+    <a routerLink="/dashboard" class="side-menu-link slide-menu-item"
+       routerLinkActive="side-menu-link-active"
+       [routerLinkActiveOptions]="{ exact: true }"
+       (click)="sidenav.toggle()">
+      <div class="slide-menu-item-align">
+        <mat-icon>dashboard</mat-icon>
+        <span>Dashboard</span>
+      </div>
+    </a>
+    <a routerLink="/admin-panel" class="side-menu-link slide-menu-item"
+       routerLinkActive="side-menu-link-active"
+       [routerLinkActiveOptions]="{ exact: true }"
+       (click)="sidenav.toggle()">
+      <div class="slide-menu-item-align">
+        <mat-icon>face</mat-icon>
+        <div>Admin Page</div>
+      </div>
+    </a>
+
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary" class="fixed-header">
+      <mat-toolbar-row class="toolbar-container">
+        <span>My TodoList App</span>
+        <div>
+          <button mat-icon-button class="icon-button">
+            <mat-icon (click)="sidenav.toggle()">more_vert</mat-icon>
+          </button>
+        </div>
+      </mat-toolbar-row>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
