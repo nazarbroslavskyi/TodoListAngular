@@ -1,6 +1,34 @@
-<mat-toolbar color="primary">
-  <mat-toolbar-row class="toolbar-container">
-    <span>My TodoList App</span>
-    <mat-icon class="example-icon" aria-hidden="false" aria-label="Example heart icon">favorite</mat-icon>
-  </mat-toolbar-row>
-</mat-toolbar>
+<mat-sidenav-container class="example-container">
+  <mat-sidenav #sidenav>
+    <div class="sidenav-close-btn-container">
+      <button class="close-sidenav-btn" (click)="sidenav.toggle()"><mat-icon>close</mat-icon></button>
+    </div>
+    <div class="slide-menu-item">
+      <div class="slide-menu-item-align">
+        <mat-icon>dashboard</mat-icon>
+        <span (click)="sidenav.toggle()">Dashboard</span>
+      </div>
+    </div>
+    <div class="slide-menu-item">
+      <div class="slide-menu-item-align">
+        <mat-icon>face</mat-icon>
+        <span (click)="sidenav.toggle()">Admin Page</span>
+      </div>
+    </div>
+
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary" class="fixed-header">
+      <mat-toolbar-row class="toolbar-container">
+        <span>My TodoList App</span>
+        <div>
+          <button mat-icon-button class="icon-button">
+            <mat-icon (click)="sidenav.toggle()">more_vert</mat-icon>
+          </button>
+        </div>
+      </mat-toolbar-row>
+    </mat-toolbar>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+
