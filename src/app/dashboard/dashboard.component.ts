@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms'
 
 @Component({
   selector: 'app-dashboard',
@@ -6,6 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+  task = new FormControl('', [Validators.required]);
+
+  getErrorMessage() {
+    return this.task.hasError('required') ? 'You must enter a value' :
+      this.task.hasError('email') ? 'Not a valid email' :
+        '';
+  }
 
   constructor() { }
 

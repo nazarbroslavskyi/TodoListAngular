@@ -4,7 +4,10 @@
   margin-top: 20px;
 
   .example-card {
-    max-width: 400px;
+    max-width: 500px;
+    width: 100%;
+    margin-right: 20px;
+    margin-left: 20px;
   }
 
   .example-header-image {
@@ -14,13 +17,21 @@
 
   .example-form {
     min-width: 150px;
-    max-width: 500px;
+    //max-width: 500px;
     width: 100%;
     margin-top: 20px;
   }
 
   .example-full-width {
     width: 100%;
+  }
+
+  .add-task-button {
+   border: 1px solid #3f51b5;;
+  }
+
+  .mat-card-actions {
+    margin: 0;
   }
 
 }
