@@ -1,6 +1,9 @@
 .mat-card-container {
   display: flex;
-  justify-content: center;
+  //justify-content: center;
+  flex-direction: column;
+  align-items: center;
+
   margin-top: 20px;
 
   .example-card {
@@ -33,6 +36,44 @@
   .mat-card-actions {
     margin: 0;
   }
+
+  .list-of-litems-card {
+    min-width: 500px;
+  }
+
+  .list-of-litems-card {
+    margin-top: 20px;
+  }
+
+  .todo-list {
+    padding: 0 0 0 0px;
+
+    .todo-item-container {
+      list-style-type: none;
+      margin-bottom: 10px;
+      padding: 5px 5px 5px 0px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .checkbox-container {
+      //padding-left: 16px;
+
+      &:hover {
+        background-color: lightgrey;
+      }
+    }
+
+    .checkbox-option {
+      padding-left: 16px;
+    }
+
+    .option-tools {
+      display: flex;
+    }
+  }
+
 
 }
 
