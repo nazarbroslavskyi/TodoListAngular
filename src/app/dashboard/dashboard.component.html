@@ -33,25 +33,27 @@
 <!--        bred for hunting.-->
 <!--      </p>-->
      <ul class="todo-list">
-       <li class="todo-item-container" *ngFor="let todoIem of todoListItems">
+       <li class="todo-item-container" *ngFor="let todoIem of todoListItems; let index = index">
          <div class="checkbox-container">
-           <mat-checkbox class="checkbox-option">
-             {{todoIem.title}}</mat-checkbox>
+           <mat-checkbox class="checkbox-option" [class.importantItem]="todoIem.important">
+             {{todoIem.title}}
+           </mat-checkbox>
          </div>
          <div class="option-tools">
            <div>
-             <button mat-icon-button color="primary">
-               <mat-icon>edit</mat-icon>
+             <button mat-icon-button color="primary" class="edit-item-btn">
+               <mat-icon class="edit-item-icon">edit</mat-icon>
              </button>
            </div>
            <div>
-             <button mat-icon-button color="primary">
-               <mat-icon>error</mat-icon>
+             <button mat-icon-button color="primary" [class.importantButtonActive]="todoIem.important"
+                     class="mark-as-important-btn" (click)="onMakeImporantItem(todoIem)">
+               <mat-icon class="mark-as-important-icon">error</mat-icon>
              </button>
            </div>
            <div>
-             <button mat-icon-button color="primary">
-               <mat-icon>delete</mat-icon>
+             <button mat-icon-button color="primary" class="delete-item-btn" (click)="openDialog()">
+               <mat-icon class="delete-item-icon">delete</mat-icon>
              </button>
            </div>
          </div>

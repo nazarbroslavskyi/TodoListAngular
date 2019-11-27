@@ -15,18 +15,27 @@ import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatRippleModule } from '@angular/material/core';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { HeaderComponent } from './header/header.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
+import { ConfirmDeleteItemModalComponent } from './dashboard/confirm-delete-item-modal/confirm-delete-item-modal.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     SidenavComponent,
     DashboardComponent,
-    AdminPanelComponent
+    AdminPanelComponent,
+    ConfirmDeleteItemModalComponent
+
+  ],
+  entryComponents: [
+    ConfirmDeleteItemModalComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +52,9 @@ import { AdminPanelComponent } from './admin-panel/admin-panel.component';
     MatFormFieldModule,
     ReactiveFormsModule,
     FormsModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatRippleModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -50,19 +50,30 @@
 
     .todo-item-container {
       list-style-type: none;
-      margin-bottom: 10px;
-      padding: 5px 5px 5px 0px;
+      margin-bottom: 0px;
+      //padding: 5px 5px 5px 0px;
+      padding-left: 0px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-    }
-
-    .checkbox-container {
-      //padding-left: 16px;
+      border-radius: 10px;
 
       &:hover {
         background-color: lightgrey;
+        border-radius: 10px
       }
+    }
+
+    .checkbox-container {
+      width: 100%;
+
+      .checkbox-option {
+        width: 100%;
+        display: inline-block;
+      }
+      //&:hover {
+      //  background-color: lightgrey;
+      //}
     }
 
     .checkbox-option {
@@ -72,9 +83,54 @@
     .option-tools {
       display: flex;
     }
+
+    .edit-item-btn {
+
+      .edit-item-icon:hover {
+        //color: royalblue;
+        color: deepskyblue;
+        transform: scaleX(1.2) scaleY(1.2);
+      }
+    }
+
+    .mark-as-important-btn {
+
+      .mark-as-important-icon:hover {
+        color: orange;
+        transform: scaleX(1.2) scaleY(1.2);
+      }
+    }
+
+    .delete-item-btn {
+
+      .delete-item-icon:hover {
+        color: red;
+        transform: scaleX(1.2) scaleY(1.2);
+      }
+    }
+
+    .importantItem {
+      font-weight: 900;
+      font-size: 16px;
+    }
+
+    .importantButtonActive {
+      color: orange;
+    }
   }
-
-
 }
 
 
+:host ::ng-deep .mat-checkbox-layout {
+  //width: calc(100% - 16px);
+  width: 100%;
+  margin-left: 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 8px 0;
+}
+
+:host ::ng-deep .mat-checkbox-inner-container {
+  margin-left: 0;
+}
