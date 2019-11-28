@@ -1,9 +1,10 @@
 import {Component, ElementRef, OnInit, ViewChild, AfterViewInit, ViewChildren, QueryList} from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { TodoItem } from './todo-item';
-import { MatButton } from "@angular/material";
+import {MatButton, MatCheckboxChange} from "@angular/material";
 import { MatDialog } from "@angular/material";
 import { ConfirmDeleteItemModalComponent } from "./confirm-delete-item-modal/confirm-delete-item-modal.component";
+import { EditItemComponent } from "./edit-item/edit-item.component";
 
 @Component({
   selector: 'app-dashboard',
@@ -22,9 +23,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   private name: string;
 
 
-  constructor(public dialog: MatDialog) {
-
-  }
+  constructor(public dialog: MatDialog) {}
 
   ngOnInit() {
 
@@ -32,16 +31,28 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
     this.todoListItems = [
       {
-        id: 0,
         title: 'Feed Dog',
         // description: 'give dog some meat',
+        done: true,
+        important: false
+      },
+
+      {
+        title: 'Buy some foods',
+        // description: 'buy oil, meat for dog, some flour, onion, salt and dumpings',
         done: false,
         important: false
       },
 
       {
-        id: 1,
-        title: 'Buy some foods',
+        title: 'Write a todo list',
+        // description: 'buy oil, meat for dog, some flour, onion, salt and dumpings',
+        done: false,
+        important: true
+      },
+
+      {
+        title: 'Go for a walk',
         // description: 'buy oil, meat for dog, some flour, onion, salt and dumpings',
         done: false,
         important: false
@@ -62,14 +73,35 @@ export class DashboardComponent implements OnInit, AfterViewInit {
    // this.btnOfError.ripple.radius = 17;
   }
 
-  openDialog(): void {
+  onOpenDeleteDialog(indexOfItem): void {
     const dialogRef = this.dialog.open(ConfirmDeleteItemModalComponent, {
       width: '450px',
-      data: {name: this.name, animal: this.animal}
+      data: {indexOfItem: indexOfItem}
     });
-
+    console.log(dialogRef);
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      // console.log('The dialog was closed');
+      console.log(typeof result);
+      if(result) {
+        this.onDeleteTodoItem(indexOfItem);
+      }
+    });
+  }
+
+  onOpenEditDialog(indexOfItem: number) {
+    const dialogRef = this.dialog.open(EditItemComponent, {
+      width: '450px',
+      data: { indexOfItem: indexOfItem }
+    });
+    // console.log(dialogRef);
+    dialogRef.afterClosed().subscribe(result => {
+      // console.log('The dialog was closed');
+      // console.log(result);
+      // console.log(indexOfItem);
+      // console.log(dialogRef);
+      if(result) {
+        console.log(result);
+      }
     });
   }
 
@@ -80,8 +112,17 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   }
 
   onMakeImporantItem(itemOfTodoList) {
-    // this.importantindItem = !this.importantItem;
-    console.log(itemOfTodoList.important = !itemOfTodoList.important);
+    itemOfTodoList.important = !itemOfTodoList.important
+  }
+
+  onDeleteTodoItem(indexOfItem) {
+    this.todoListItems.splice(indexOfItem, 1);
+    // console.log(this.todoListItems);
+  }
+
+  toggleCheckbox(index) {
+    // console.log(index);
+    this.todoListItems[index].done = !this.todoListItems[index].done;
   }
 
 }

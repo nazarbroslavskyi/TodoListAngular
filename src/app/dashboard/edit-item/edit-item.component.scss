@@ -1,0 +1,25 @@
+.edit-todo-title-wraper {
+  position: relative;
+  margin-bottom: 25px;
+
+  .close-btn-modal {
+    position: absolute;
+    top: -20px;
+    right: -20px;
+  }
+
+  .modal-title {
+    border-bottom: 1px solid black;
+    width: 95%;
+    display: inline;
+  }
+}
+
+.edit-item-modal-actions {
+ display: flex;
+  justify-content: flex-end;
+}
+
+.input-of-edit-modal {
+  width: 100%;
+}

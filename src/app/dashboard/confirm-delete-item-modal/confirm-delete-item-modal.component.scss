@@ -1,0 +1,40 @@
+//.scroll {
+// max-height: 100px;
+//  overflow-y: scroll;
+//}
+
+.modal-title {
+  margin: 0;
+  width: 95%;
+  border-bottom: 1px solid black;
+}
+
+.modal-title-container {
+  //display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.close-btn-modal:hover {
+  //background-color: transparent !important;
+  //background-color: red;
+  border-radius: 50%;
+  color: black;
+  transform: scale(1.15);
+}
+
+.close-btn-modal {
+ position: absolute;
+  top: -20px;
+  right: -20px;
+}
+
+.modal-content {
+ line-height: 1.5;
+}
+
+.delete-item-modal-actions {
+ display: flex;
+  justify-content: flex-end;
+}

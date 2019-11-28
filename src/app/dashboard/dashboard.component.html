@@ -33,26 +33,34 @@
 <!--        bred for hunting.-->
 <!--      </p>-->
      <ul class="todo-list">
+       <div class="list-is-empty-description" *ngIf="todoListItems.length === 0">
+         The list is empty. Add something there using the form above
+       </div>
        <li class="todo-item-container" *ngFor="let todoIem of todoListItems; let index = index">
          <div class="checkbox-container">
-           <mat-checkbox class="checkbox-option" [class.importantItem]="todoIem.important">
+           <mat-checkbox class="checkbox-option" [class.importantItem]="todoIem.important" title="Check as fulfilled"
+                         [checked]="todoIem.done" [class.todoItemIsDone]="todoIem.done" (change)="toggleCheckbox(index)">
              {{todoIem.title}}
            </mat-checkbox>
          </div>
          <div class="option-tools">
            <div>
-             <button mat-icon-button color="primary" class="edit-item-btn">
+             <button mat-icon-button color="primary" class="edit-item-btn" onclick="this.blur()" title="Edit item"
+                     (click)="onOpenEditDialog(index)">
                <mat-icon class="edit-item-icon">edit</mat-icon>
              </button>
            </div>
            <div>
              <button mat-icon-button color="primary" [class.importantButtonActive]="todoIem.important"
-                     class="mark-as-important-btn" (click)="onMakeImporantItem(todoIem)">
+                     onclick="this.blur()"
+                     class="mark-as-important-btn" (click)="onMakeImporantItem(todoIem)"
+                     title="Make item important">
                <mat-icon class="mark-as-important-icon">error</mat-icon>
              </button>
            </div>
            <div>
-             <button mat-icon-button color="primary" class="delete-item-btn" (click)="openDialog()">
+             <button mat-icon-button color="primary" class="delete-item-btn" (click)="onOpenDeleteDialog(index)"
+                     onclick="this.blur()" title="Delete Item">
                <mat-icon class="delete-item-icon">delete</mat-icon>
              </button>
            </div>

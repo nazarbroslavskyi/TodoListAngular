@@ -17,12 +17,15 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRippleModule } from '@angular/material/core';
 import { MatDialogModule } from '@angular/material/dialog';
+import { A11yModule } from '@angular/cdk/a11y';
 
 import { HeaderComponent } from './header/header.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { ConfirmDeleteItemModalComponent } from './dashboard/confirm-delete-item-modal/confirm-delete-item-modal.component';
+import { EditItemComponent } from './dashboard/edit-item/edit-item.component';
+
 
 @NgModule({
   declarations: [
@@ -31,11 +34,13 @@ import { ConfirmDeleteItemModalComponent } from './dashboard/confirm-delete-item
     SidenavComponent,
     DashboardComponent,
     AdminPanelComponent,
-    ConfirmDeleteItemModalComponent
+    ConfirmDeleteItemModalComponent,
+    EditItemComponent
 
   ],
   entryComponents: [
-    ConfirmDeleteItemModalComponent
+    ConfirmDeleteItemModalComponent,
+    EditItemComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +59,8 @@ import { ConfirmDeleteItemModalComponent } from './dashboard/confirm-delete-item
     FormsModule,
     MatCheckboxModule,
     MatRippleModule,
-    MatDialogModule
+    MatDialogModule,
+    A11yModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,19 +1,16 @@
 <div class="delete-item-of-todo-modal"></div>
-<h1 mat-dialog-title>Are you sure ?</h1>
+<div mat-dialog-title class="modal-title-container">
+  <h3 class="modal-title" cdkFocusRegionStart>Are you sure ?</h3>
+  <button mat-icon-button mat-dialog-close class="close-btn-modal"><mat-icon>close</mat-icon></button>
+</div>
 <div class="delete-item-modal-content" mat-dialog-content>
-
+  <div class="modal-content">
+    Are you sure you want to delete this task ? This action <strong>CAN NOT</strong> be undone and you will be unable
+    to recover any data.
+<!--    <button mat-button mat-dialog-close>No Thanks</button>-->
+  </div>
 </div>
 <div class="delete-item-modal-actions" mat-dialog-actions>
-  <button class="cancel-btn-of-delete">Cancel</button>
-  <button class=""></button>
+  <button class="cancel-btn-of-delete" mat-dialog-close mat-raised-button color="primary">Cancel</button>
+  <button class="submit-button" mat-raised-button (click)="closeModal()" color="warn">Delete</button>
 </div>
-
-
-
-    <div>
-      <p>What's your favorite animal?</p>
-      <button mat-button mat-dialog-close>No Thanks</button>
-    </div>
-    <mat-dialog-content>	Primary scrollable content of the dialog.
-      <mat-dialog-actions>	Container for action buttons at the bottom of the dialog. Button alignment can be controlled via the align attribute which can be set to end and center.
-        mat-dialog-close

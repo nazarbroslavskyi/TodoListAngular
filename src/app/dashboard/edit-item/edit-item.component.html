@@ -1,1 +1,15 @@
-<p>edit-item works!</p>
+<div class="edit-todo-title-wraper">
+  <button mat-icon-button mat-dialog-close class="close-btn-modal"><mat-icon>close</mat-icon></button>
+  <h1 mat-dialog-title class="modal-title">Please edit your task!</h1>
+</div>
+<div mat-dialog-content>
+<form class="edit-item-form">
+  <mat-form-field class="input-of-edit-modal">
+    <input matInput placeholder="Change the name of your task">
+  </mat-form-field>
+</form>
+</div>
+<div mat-dialog-actions class="edit-item-modal-actions">
+  <button mat-button class="cancel-edit-btn" mat-dialog-close mat-raised-button color="primary">Cancel</button>
+  <button mat-button class="save-btn" mat-raised-button  color="warn" (click)="oncloseModalEditWindow()" cdkFocusInitial>Ok</button>
+</div>
