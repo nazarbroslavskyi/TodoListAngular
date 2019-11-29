@@ -2,7 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Validators } from "@angular/forms";
 import { FormControl } from "@angular/forms";
-
+import { debounceTime } from "rxjs/operators";
 
 @Component({
   selector: 'app-edit-item',
@@ -13,26 +13,19 @@ export class EditItemComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<EditItemComponent>, @Inject(MAT_DIALOG_DATA) public data: any) { }
 
-  myFormControl = new FormControl(
-    { value: 'My String Value', disabled: true },
-    [ Validators.required, Validators.maxLength(30)]
+  myFormControl: FormControl = new FormControl(
+    { value: this.data.title, disabled: false },
+    [ Validators.required, Validators.required]
   );
 
   ngOnInit() {
     console.log(this.myFormControl);
-
+    this.myFormControl.valueChanges.pipe(debounceTime(500)).subscribe(value => {
+      console.log(value);
+    });
   }
 
-
-
-  oncloseModalEditWindow() {
+  onSaveChanges() {
     this.dialogRef.close(this.data);
   }
-
-
-
-
-
-
-
 }

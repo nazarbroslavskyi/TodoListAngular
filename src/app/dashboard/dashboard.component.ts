@@ -76,7 +76,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   onOpenDeleteDialog(indexOfItem): void {
     const dialogRef = this.dialog.open(ConfirmDeleteItemModalComponent, {
       width: '450px',
-      data: {indexOfItem: indexOfItem}
+      data: { indexOfItem: indexOfItem }
     });
     console.log(dialogRef);
     dialogRef.afterClosed().subscribe(result => {
@@ -91,7 +91,10 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   onOpenEditDialog(indexOfItem: number) {
     const dialogRef = this.dialog.open(EditItemComponent, {
       width: '450px',
-      data: { indexOfItem: indexOfItem }
+      data: {
+        indexOfItem: indexOfItem,
+        title: this.todoListItems[indexOfItem].title
+      }
     });
     // console.log(dialogRef);
     dialogRef.afterClosed().subscribe(result => {
