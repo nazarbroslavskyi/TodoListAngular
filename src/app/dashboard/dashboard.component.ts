@@ -1,5 +1,5 @@
 import {Component, ElementRef, OnInit, ViewChild, AfterViewInit, ViewChildren, QueryList} from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { TodoItem } from './todo-item';
 import {MatButton, MatCheckboxChange} from "@angular/material";
 import { MatDialog } from "@angular/material";
@@ -13,7 +13,8 @@ import { EditItemComponent } from "./edit-item/edit-item.component";
 })
 export class DashboardComponent implements OnInit, AfterViewInit {
   private todoListItems: TodoItem[];
-  private task: FormControl;
+  public task: FormControl;
+  public addTaskForm: FormGroup;
   // @ViewChildren('btnOfEdit') btnOfEdit: QueryList<MatButton>;
   // @ViewChild('btnOfError', { static: false }) btnOfError: MatButton;
   // @ViewChild('btnOfDelete', { static: false }) btnOfDelete: MatButton;
@@ -28,6 +29,13 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   ngOnInit() {
 
   this.task = new FormControl('', [Validators.required]);
+
+
+  this.addTaskForm =  new FormGroup({
+    title: new FormControl('', [Validators.required]),
+    important: new FormControl(false)
+  });
+
 
     this.todoListItems = [
       {
@@ -60,6 +68,14 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     ];
     console.log(this.todoListItems);
   }
+
+
+  onSubmit(addTaskForm: FormGroup) {
+    // console.log(user);
+    // console.log(user.valid);
+    this.onAddItem(addTaskForm);
+  }
+
 
   ngAfterViewInit(): void {
     // console.log(this.btnOfEdit)
@@ -102,8 +118,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       // console.log(result);
       // console.log(indexOfItem);
       // console.log(dialogRef);
-      if(result) {
-        console.log(result);
+      if (result) {
+        this.onSaveAfterEdit(indexOfItem, result);
       }
     });
   }
@@ -128,4 +144,18 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     this.todoListItems[index].done = !this.todoListItems[index].done;
   }
 
+  onSaveAfterEdit(indexOfItem: number, editedTitle: string) {
+    this.todoListItems[indexOfItem].title = editedTitle;
+  }
+
+  onAddItem(addTaskForm: FormGroup) {
+    // console.log(this.task.value.trim());
+    this.todoListItems.push({
+      title: addTaskForm.value.title.trim(),
+      done: false,
+      important: addTaskForm.value.important
+    });
+
+    this.addTaskForm.reset();
+  }
 }

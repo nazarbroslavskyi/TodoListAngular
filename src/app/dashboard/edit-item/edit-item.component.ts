@@ -22,10 +22,11 @@ export class EditItemComponent implements OnInit {
     console.log(this.myFormControl);
     this.myFormControl.valueChanges.pipe(debounceTime(500)).subscribe(value => {
       console.log(value);
+      console.log(this.myFormControl.valid);
     });
   }
 
   onSaveChanges() {
-    this.dialogRef.close(this.data);
+    this.dialogRef.close(this.myFormControl.value);
   }
 }

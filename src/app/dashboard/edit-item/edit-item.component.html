@@ -6,10 +6,12 @@
 <form class="edit-item-form">
   <mat-form-field class="input-of-edit-modal">
     <input matInput placeholder="Change the name of your task" [formControl]="myFormControl">
+    <mat-error class="field-is-required" *ngIf="!myFormControl.valid">* This field is required</mat-error>
   </mat-form-field>
 </form>
+
 </div>
 <div mat-dialog-actions class="edit-item-modal-actions">
   <button mat-button class="cancel-edit-btn" mat-dialog-close mat-raised-button color="primary">Cancel</button>
-  <button mat-button class="save-btn" mat-raised-button  color="warn" (click)="onSaveChanges()" cdkFocusInitial>Ok</button>
+  <button mat-button class="save-btn" mat-raised-button  color="warn" (click)="onSaveChanges()" [disabled]="!myFormControl.valid" cdkFocusInitial>Save</button>
 </div>

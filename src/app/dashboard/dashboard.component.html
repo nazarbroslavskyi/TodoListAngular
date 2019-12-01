@@ -6,19 +6,23 @@
     </mat-card-header>
     <mat-card-content>
       <hr>
-      <form class="example-form">
-          <mat-form-field class="example-full-width">
-            <input matInput placeholder="Enter tour task" autocomplete="off" [formControl]="task" required>
-            <mat-error *ngIf="task.value">{{getErrorMessage()}}</mat-error>
-            <button mat-button *ngIf="task.value" matSuffix mat-icon-button aria-label="Clear" (click)="task.setValue('')">
-              <mat-icon>close</mat-icon>
-            </button>
-          </mat-form-field>
+      <form class="example-form" [formGroup]="addTaskForm" (ngSubmit)="onSubmit(addTaskForm)">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Favorite food" formControlName="title" [value]="addTaskForm.value.title" placeholder="Enter tour task">
+          <mat-error *ngIf="!addTaskForm.valid">* This field is required</mat-error>
+          <button mat-button *ngIf="addTaskForm.value.title" matSuffix mat-icon-button aria-label="Clear" (click)="addTaskForm.patchValue({title: ''})">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+        <mat-checkbox formControlName="important">Make important!</mat-checkbox>
+        <button color="primary" type="submit" [disabled]="!addTaskForm.valid" class="add-task-button"
+        mat-button>ADD</button>
       </form>
     </mat-card-content>
-    <mat-card-actions>
-      <button color="primary" class="add-task-button" mat-button>ADD</button>
-    </mat-card-actions>
+    <!-- <mat-card-actions> -->
+
+      <!-- <mat-error class="field-is-required">* This field is required</mat-error> -->
+    <!-- </mat-card-actions> -->
   </mat-card>
 
   <mat-card class="list-of-litems-card">
