@@ -20,7 +20,7 @@ export class HeaderComponent implements OnInit {
 
   toogle() {
     this.sideNav.toggle().then(result => {
-      console.log(result);
+      // console.log(result);
     })
   }
 

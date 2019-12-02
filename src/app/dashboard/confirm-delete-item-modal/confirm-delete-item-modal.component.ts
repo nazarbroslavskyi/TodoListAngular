@@ -13,10 +13,10 @@ export class ConfirmDeleteItemModalComponent implements OnInit {
               @Inject(MAT_DIALOG_DATA) public data: any) {}
 
   ngOnInit() {
-    console.log(this.dialogRef.componentInstance);
+    // console.log(this.dialogRef.componentInstance);
   }
   hello() {
-    console.log('hello');
+    // console.log('hello');
   }
   closeModal() {
     this.dialogRef.close(this.data);

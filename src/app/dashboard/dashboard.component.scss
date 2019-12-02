@@ -23,6 +23,11 @@
     //max-width: 500px;
     width: 100%;
     margin-top: 20px;
+
+    //.mat-checkbox-layout {
+    //  margin-bottom: 10px;
+    //  padding-bottom: 10px;
+    //}
   }
 
   .example-full-width {
@@ -31,6 +36,7 @@
 
   .add-task-button {
     border: 1px solid blue;
+    margin-top: 10px;
 
     &[disabled="true"] {
       // color: red;
@@ -54,6 +60,15 @@
 
   .todo-list {
     padding: 0 0 0 0px;
+    max-height: 200px;
+    min-height: 75px;
+    overflow: auto;
+
+    .loadig-container {
+      display: flex;
+      justify-content: space-around;;
+      align-items: center;
+    }
 
     .todo-item-container {
       list-style-type: none;
@@ -150,4 +165,23 @@
 
 :host ::ng-deep .mat-checkbox-inner-container {
   margin-left: 0;
+}
+
+
+#loading {
+  display: inline-block;
+  width: 45px;
+  height: 45px;
+  border: 3px solid black;
+  border-radius: 50%;
+  border-top-color: #fff;
+  animation: spin 1s ease-in-out infinite;
+  -webkit-animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { -webkit-transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+  to { -webkit-transform: rotate(360deg); }
 }

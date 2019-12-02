@@ -21,8 +21,8 @@ export class EditItemComponent implements OnInit {
   ngOnInit() {
     console.log(this.myFormControl);
     this.myFormControl.valueChanges.pipe(debounceTime(500)).subscribe(value => {
-      console.log(value);
-      console.log(this.myFormControl.valid);
+      // console.log(value);
+      // console.log(this.myFormControl.valid);
     });
   }
 

@@ -9,12 +9,12 @@
       <form class="example-form" [formGroup]="addTaskForm" (ngSubmit)="onSubmit(addTaskForm)">
         <mat-form-field class="example-full-width">
           <input matInput placeholder="Favorite food" formControlName="title" [value]="addTaskForm.value.title" placeholder="Enter tour task">
-          <mat-error *ngIf="!addTaskForm.valid">* This field is required</mat-error>
+<!--          <mat-error *ngIf="!addTaskForm.valid">* This field is required</mat-error>-->
           <button mat-button *ngIf="addTaskForm.value.title" matSuffix mat-icon-button aria-label="Clear" (click)="addTaskForm.patchValue({title: ''})">
             <mat-icon>close</mat-icon>
           </button>
         </mat-form-field>
-        <mat-checkbox formControlName="important">Make important!</mat-checkbox>
+        <mat-checkbox formControlName="important" class="make-important-checkbox">Make important!</mat-checkbox>
         <button color="primary" type="submit" [disabled]="!addTaskForm.valid" class="add-task-button"
         mat-button>ADD</button>
       </form>
@@ -31,26 +31,33 @@
       <mat-card-subtitle>Edit, delete and mark your task as fulfilled</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
+
+      <div class="todo-list-search-panel">
+
+      </div>
 <!--      <p>-->
 <!--        The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.-->
 <!--        A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally-->
 <!--        bred for hunting.-->
 <!--      </p>-->
      <ul class="todo-list">
-       <div class="list-is-empty-description" *ngIf="todoListItems.length === 0">
+       <div class="list-is-empty-description" *ngIf="todoListItems.length === 0 && !isLoading">
          The list is empty. Add something there using the form above
+       </div>
+       <div class="loadig-container">
+         <div *ngIf="isLoading" id="loading"></div>
        </div>
        <li class="todo-item-container" *ngFor="let todoIem of todoListItems; let index = index">
          <div class="checkbox-container">
            <mat-checkbox class="checkbox-option" [class.importantItem]="todoIem.important" title="Check as fulfilled"
-                         [checked]="todoIem.done" [class.todoItemIsDone]="todoIem.done" (change)="toggleCheckbox(index)">
+                         [checked]="todoIem.done" [class.todoItemIsDone]="todoIem.done" (change)="toggleCheckbox(todoIem)">
              {{todoIem.title}}
            </mat-checkbox>
          </div>
          <div class="option-tools">
            <div>
              <button mat-icon-button color="primary" class="edit-item-btn" onclick="this.blur()" title="Edit item"
-                     (click)="onOpenEditDialog(index)">
+                     (click)="onOpenEditDialog(index, todoIem.id)">
                <mat-icon class="edit-item-icon">edit</mat-icon>
              </button>
            </div>
@@ -63,7 +70,7 @@
              </button>
            </div>
            <div>
-             <button mat-icon-button color="primary" class="delete-item-btn" (click)="onOpenDeleteDialog(index)"
+             <button mat-icon-button color="primary" class="delete-item-btn" (click)="onOpenDeleteDialog(todoIem.id)"
                      onclick="this.blur()" title="Delete Item">
                <mat-icon class="delete-item-icon">delete</mat-icon>
              </button>
@@ -78,3 +85,4 @@
     </mat-card-actions>
   </mat-card>
 </div>
+<!--<button (click)="getonepost()">getonepost</button>-->

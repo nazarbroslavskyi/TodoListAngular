@@ -18,6 +18,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRippleModule } from '@angular/material/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { A11yModule } from '@angular/cdk/a11y';
+import { HttpClientModule } from "@angular/common/http";
 
 import { HeaderComponent } from './header/header.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
@@ -60,7 +61,8 @@ import { EditItemComponent } from './dashboard/edit-item/edit-item.component';
     MatCheckboxModule,
     MatRippleModule,
     MatDialogModule,
-    A11yModule
+    A11yModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
