@@ -52,10 +52,112 @@
 
   .list-of-litems-card {
     min-width: 500px;
+
+    .additional-information {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .todo-list-search-panel {
+      flex-grow: 1;
+      margin-right: 15px;
+      margin-left: 15px;
+    }
+
+    //::ng-deep .mat-form-field-infix {
+    //  padding: 0;
+    //}
+    .search-of-todo-item {
+      border: 1px solid gray;
+      padding: 5px 15px;
+      border-radius: 10px;
+      box-sizing: border-box;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    .show-all-items-btn {
+      cursor: pointer;
+      border: 1px solid gray;
+      padding: 5px 20px;
+      font-size: 14px;
+      color: gray;
+      border-bottom-left-radius: 10px;
+      border-top-left-radius: 10px;
+      border-right: none;
+
+
+      &:hover {
+        background-color: #19a1b7;
+        background-color: rgba(0,0,0,.27);
+      }
+
+      //border: none;
+      &:focus {
+        outline: none;
+      }
+    }
+
+    .show-active-items {
+      cursor: pointer;
+      padding: 5px 20px;
+      border: 1px solid gray;
+      font-size: 14px;
+      border-right: none;
+      color: gray;
+
+      &:hover {
+        background-color: rgba(0,0,0,.27);
+      }
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    .show-done-items {
+      cursor: pointer;
+      padding: 5px 20px;
+      font-size: 14px;
+      color: gray;
+      border: none;
+      border: 1px solid gray;
+      border-bottom-right-radius: 10px;
+      border-top-right-radius: 10px;
+
+      &:hover {
+        background-color: rgba(0,0,0,.27);
+      }
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    .active-btn {
+      background-color: #19A1B7;
+      color: white;
+      cursor: default;
+      &:hover {
+        background-color: #19A1B7;
+      }
+    }
   }
 
   .list-of-litems-card {
     margin-top: 20px;
+
+    ::ng-deep .mat-card-header-text {
+      width: 100%;
+    }
+
+    .info-do-and-done {
+      white-space: nowrap;
+    }
+
   }
 
   .todo-list {

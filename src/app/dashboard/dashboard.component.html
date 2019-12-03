@@ -29,12 +29,24 @@
     <mat-card-header>
       <mat-card-title>List of Your Tasks</mat-card-title>
       <mat-card-subtitle>Edit, delete and mark your task as fulfilled</mat-card-subtitle>
+      <div><p class="info-do-and-done">{{howManyToDo}} more to do, {{howManyDone}} done</p></div>
     </mat-card-header>
     <mat-card-content>
-
-      <div class="todo-list-search-panel">
-
+      <div class="additional-information">
+        <div class="todo-list-search-panel">
+<!--          <input type="text" placeholder="Type to search">-->
+<!--            <mat-label>Outline form field</mat-label>-->
+            <input class="search-of-todo-item" matInput placeholder="Type to search" autocomplete="off" [formControl]="searchInput">
+        </div>
+        <div class="items-information">
+          <button class="show-all-items-btn" [class.active-btn]="allItemsChecked" (click)="showAllItems()">All</button>
+          <button class="show-active-items"  [class.active-btn]="activeItemsChecked" (click)="showActiveItems()">Important</button>
+          <button class="show-done-items" [class.active-btn]="doneItemsChecked" (click)="showDoneItems()">Done</button>
+        </div>
       </div>
+<!--      <div class="todo-list-search-panel">-->
+
+<!--      </div>-->
 <!--      <p>-->
 <!--        The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.-->
 <!--        A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally-->
@@ -47,7 +59,8 @@
        <div class="loadig-container">
          <div *ngIf="isLoading" id="loading"></div>
        </div>
-       <li class="todo-item-container" *ngFor="let todoIem of todoListItems; let index = index">
+       <li class="todo-item-container" *ngFor="let todoIem of todoListItems
+        | todoItemsFilter:searchInputValue:allItemsChecked:activeItemsChecked:doneItemsChecked; let index = index">
          <div class="checkbox-container">
            <mat-checkbox class="checkbox-option" [class.importantItem]="todoIem.important" title="Check as fulfilled"
                          [checked]="todoIem.done" [class.todoItemIsDone]="todoIem.done" (change)="toggleCheckbox(todoIem)">

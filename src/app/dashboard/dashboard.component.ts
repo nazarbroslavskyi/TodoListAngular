@@ -6,6 +6,7 @@ import { MatDialog } from "@angular/material";
 import { ConfirmDeleteItemModalComponent } from "./confirm-delete-item-modal/confirm-delete-item-modal.component";
 import { EditItemComponent } from "./edit-item/edit-item.component";
 import { TodoListItemsService } from "../../../shared/todo-list-items.service";
+import { debounceTime, distinctUntilChanged } from "rxjs/operators";
 
 @Component({
   selector: 'app-dashboard',
@@ -14,9 +15,17 @@ import { TodoListItemsService } from "../../../shared/todo-list-items.service";
 })
 export class DashboardComponent implements OnInit, AfterViewInit {
   public todoListItems: TodoItem[] = [];
+  public todoListItemsFilter: TodoItem[] = [];
   public task: FormControl;
   public addTaskForm: FormGroup;
   public isLoading = true;
+  public allItemsChecked = true;
+  public  activeItemsChecked = false;
+  public doneItemsChecked = false;
+  searchInput: FormControl = new FormControl('');
+  public searchInputValue = '';
+  public howManyDone = 0;
+  public howManyToDo = 0;
   // @ViewChildren('btnOfEdit') btnOfEdit: QueryList<MatButton>;
   // @ViewChild('btnOfError', { static: false }) btnOfError: MatButton;
   // @ViewChild('btnOfDelete', { static: false }) btnOfDelete: MatButton;
@@ -31,6 +40,14 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.todolist.getTodoListItems().subscribe(data => {
       this.todoListItems = data;
+      this.todoListItems.forEach(item => {
+        if (item.done) {
+          this.howManyDone++;
+        } else {
+          this.howManyToDo++;
+        }
+      });
+      // this.todoListItemsFilter = data.slice();
       // console.log(this.todoListItems);
       this.isLoading = false;
     });
@@ -41,6 +58,17 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     title: new FormControl('', [Validators.required]),
     important: new FormControl(false)
   });
+
+    this.searchInput.valueChanges
+      .pipe(
+        debounceTime(400),
+        distinctUntilChanged()
+      )
+      .subscribe(res => {
+        console.log(this.todoListItems);
+        this.searchInputValue = this.searchInput.value;
+      });
+
 
     // this.todoListItems = [
     //   {
@@ -151,6 +179,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
         return true;
       }
     });
+    this.todoListItems = this.todoListItems.slice();
     this.todoListItems.splice(index, 1);
   }
 
@@ -159,6 +188,13 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
     this.todolist.makeTodoListItemDone(itemOfTodoList.id, {done: !itemOfTodoList.done }).subscribe(data => {
       itemOfTodoList.done = !itemOfTodoList.done;
+      if(itemOfTodoList.done) {
+        this.howManyDone++;
+        this.howManyToDo--;
+      } else {
+        this.howManyDone--;
+        this.howManyToDo++;
+      }
     })
 
   }
@@ -176,12 +212,13 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       // console.log(data);
       // console.log(addTaskForm);
       // console.log(this.todoListItems);
-      this.todoListItems.push({
+      this.todoListItems = [...this.todoListItems, {
         title: addTaskForm.value.title.trim(),
         done: false,
         important: addTaskForm.value.important || false,
         id: data.name
-      });
+      }];
+      // this.todoListItems.push();
       this.addTaskForm.reset();
     });
     // console.log(this.task.value.trim());
@@ -190,5 +227,23 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
   getonepost() {
     this.todolist.getTodoListItems();
+  }
+
+  showAllItems() {
+    this.allItemsChecked = true;
+    this.activeItemsChecked = false;
+    this.doneItemsChecked = false;
+  }
+
+  showActiveItems() {
+    this.allItemsChecked = false;
+    this.activeItemsChecked = true;
+    this.doneItemsChecked = false;
+  }
+
+  showDoneItems() {
+    this.allItemsChecked = false;
+    this.activeItemsChecked = false;
+    this.doneItemsChecked = true;
   }
 }

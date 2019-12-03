@@ -26,6 +26,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { ConfirmDeleteItemModalComponent } from './dashboard/confirm-delete-item-modal/confirm-delete-item-modal.component';
 import { EditItemComponent } from './dashboard/edit-item/edit-item.component';
+import {TodoItemsFilter} from "./dashboard/filter-todoitems.pipe";
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { EditItemComponent } from './dashboard/edit-item/edit-item.component';
     DashboardComponent,
     AdminPanelComponent,
     ConfirmDeleteItemModalComponent,
-    EditItemComponent
+    EditItemComponent,
+    TodoItemsFilter
 
   ],
   entryComponents: [
